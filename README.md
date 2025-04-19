@@ -2,7 +2,7 @@
 
 This is a web-based application for managing personal finances, including tracking expenses and income. It provides an intuitive interface with real-time updates, leveraging modern web technologies.
 
-[CLICK HERE TO SEE THE DEMO](https://muzeffertagiyev.github.io/WalletJSApp/)
+[CLICK HERE TO SEE THE DEMO WEBSITE](https://muzeffertagiyev.github.io/WalletJSApp/)
 ---
 
 ## Project Overview
