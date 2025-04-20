@@ -1,7 +1,7 @@
-
 // ! Buttons
 const saveBtn = document.getElementById("save-btn")
 const addBtn = document.getElementById("add-btn")
+const updateBtn = document.getElementById("update-btn")
 const cleanAllBtn = document.getElementById("clean-all-btn")
 
 
@@ -81,6 +81,18 @@ function addIncomeToLocalStorage(newIncome){
     localStorage.setItem('income',JSON.stringify(totalIncome))
 }
 
+// ? Update income in local storage
+
+function updateIncomeFromLocalStorage(updatedIncome){
+    if(JSON.parse(localStorage.getItem("income"))){
+        localStorage.setItem('income',JSON.stringify(parseFloat(updatedIncome)))
+    }
+    else{
+        alert("Please first add income, then you can update it")
+    }
+    
+}
+
 // ? Show Calculation table
 function showCalculationTable(){
     const allExpenses = Array.from(getAllExpenses()).map((expense)=>parseFloat(expense.expenseAmount)).reduce((sum,expense)=>sum+expense,0).toFixed(2)
@@ -112,7 +124,6 @@ saveBtn.addEventListener('click',(e)=>{
     if(saveForm.checkValidity()){
         e.preventDefault()
     }
-    
 
     if(dateField.value && expensePlaceField.value && expenseAmountField.value){
         const expense = {
@@ -145,15 +156,27 @@ expensesTable.querySelector("tbody").addEventListener("click", (e) => {
 
 // ? Adding income event
 addBtn.addEventListener("click",(e)=>{
-
     if(incomeForm.checkValidity()){
         e.preventDefault()
     }
-    
 
     if(incomeInputField.value){
         addIncomeToLocalStorage(incomeInputField.value)
         incomeInputField.value = ''
+    }
+    showCalculationTable()
+})
+// ? Updating income event
+updateBtn.addEventListener("click",(e)=>{
+    if(incomeForm.checkValidity()){
+        e.preventDefault()
+    }
+
+    if(incomeInputField.value){
+        if(confirm("Do you really want to change your income from local storage?")){
+            updateIncomeFromLocalStorage(incomeInputField.value)
+            incomeInputField.value=''
+        }
     }
     showCalculationTable()
 })
